@@ -1,45 +1,32 @@
-.intro {
-  font-size: 15px;
-  text-align: left;
-}
-
-.chart div {
+body {
   font: 10px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
 }
-
-path {
-  fill: none;
-  stroke: #000;
-  stroke-width: .5px;
-  stroke-linejoin: round;
-  stroke-linecap: round;
+h1 {
+  font: 40px sans-serif;
 }
-
+/*grid area setting*/
 .item1 { grid-area: header; }
 .item2 { grid-area: intro; }
 .item3 { grid-area: graph; }
 .item4 { grid-area: map; }
 .item5 { grid-area: footer; }
+.item6 { grid-area: scatter; }
 
-.rcorners1 {
-  border-radius: 15px;
-  background: #73AD21;
-  padding: 20px; 
-  width: 100;
-  height: 50px; 
+.intro {
+  font-size: 15px;
+  text-align: left;
 }
 
+/*web page layout*/
 .grid-container {
   display: grid;
   grid-template-areas:
     'header header'
     'intro map'
-    'graph map';
+    'graph map'
+    'scatter map';
+  grid-template-rows:  10% 30% 30% auto;
+  grid-template-columns:  40% auto;
   grid-gap: 10px;
   background-color: #ffffff;
   padding: 10px;
@@ -52,10 +39,16 @@ path {
   font-size: 30px;
 }
 
-body {
-  font: 10px sans-serif;
-}
+/*histogram*/
 
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
 .axis path,
 .axis line {
   fill: none;
@@ -102,4 +95,24 @@ body {
   margin: -1px 0 0 0;
   top: 100%;
   left: 0;
+}
+
+
+
+/*map drawing */
+path {
+  fill: none;
+  stroke: #000;
+  stroke-width: .5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+
+.rcorners1 {
+  border-radius: 15px;
+  background: #3282b9;
+  padding: 20px; 
+  width: 100;
+  height: 50px; 
 }

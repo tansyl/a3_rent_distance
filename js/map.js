@@ -42,6 +42,7 @@ d3.queue()
 
 // start construct an array of objects that includes geoid, centerCoord_long, centerCoord_lat, distance_to_center, median_rent
 var distanceRent = {}; 
+var distanceRentList =[];
 
 function ready(error, us, rent) {
   if (error) throw error;
@@ -134,12 +135,15 @@ function ready(error, us, rent) {
               elt.attr("distance",getDistance(p1,p2));
           });
 
+          distanceRentList = Object.keys(distanceRent).map(function(key){return distanceRent[key];});
+
           console.log(distanceRent[360550116014]);
         }
       })
       .style("fill", function(d) {return color(rentByGeoid[parseFloat(d.properties.GEOID)])})
       .style("stroke", "black");
 
+  distanceRentList = Object.keys(distanceRent).map(function(key){return distanceRent[key];});
   console.log(distanceRent[360550116014]);
 
   // get all centroids
@@ -149,15 +153,24 @@ function ready(error, us, rent) {
 
 }
 
+// scatter plot code here
+var scattersvg = d3.select("#scatterplot").append("svg")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .data(distanceRentList)
+    .enter()
+    .append("p")
+    .text(function (d,i) {return "i = " + i + " d = "+d.median_rent;});
+
 var data = [30, 86, 168, 281, 303, 365];
 
+// histogram plot code here
 hist = d3.select("#histogram").select(".chart")
   .selectAll("div")
-  .data(data)
+  .data(distanceRentList)
     .enter()
     .append("div")
-    .style("width", function(d) { return d + "px"; })
-    .text(function(d) { return d; });
+    .style("height", function(d) { return d.median_rent/1000 + "px"; })
 
 d3.select(self.frameElement).style("height", height + "px");
 
